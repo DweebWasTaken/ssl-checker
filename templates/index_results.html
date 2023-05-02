@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" class="h-100">
+{% include "header.html" %}
+
+<body class="d-flex h-100 text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0 textshadows">SSL Expiry Checker</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="#">Single Website check</a>
+                    <a class="nav-link" href="#">API</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3 ">
+
+            <h1 class="textshadows">Single Website Check</h1>
+            <p class="lead">Simply supply a valid FQDN below which will produce certificate dates and expiry days left</p>
+
+
+            <form action="{{ url_for('home') }}" method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="https://sub.example.com" name="hostname">
+                    <label for="floatingInput" style="color: black;">FQDN</label>
+                </div>
+                <button type="submit" class="myButton">Check</button>
+            </form>
+
+            <table class="table" style="color: rgb(0, 0, 0); margin-top: 5%;">
+                <thead>
+                    <tr>
+                        <th scope="col">Hostname</th>
+                        <th scope="col">Issuer</th>
+                        <th scope="col">Expiry Start Date</th>
+                        <th scope="col">Expiry End Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Days till Expiry</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ cert_hostname }}</td>
+                        <td>{{ cert_issuer }}</td>
+                        <td>{{ cert_start_date }}</td>
+                        <td>{{ cert_end_date }}</td>
+                        <td>{{ cert_status }}</td>
+                        <td>{{ cert_expiry_days }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+
+        {% include "footer.html" %}
+    </div>
+
+
+
+</body>
+
+</html>
